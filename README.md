@@ -15,11 +15,12 @@ A comprehensive hands-on learning project for mastering Kubernetes concepts thro
 - Environment variable injection
 - MongoDB authentication setup
 
-### Phase 3: Persistent Volumes & StatefulSets (Coming Soon)
-- Persistent Volume Claims (PVC)
-- Storage Classes
-- StatefulSets for stateful applications
-- Data persistence across pod restarts
+### Phase 3: Persistent Volumes & StatefulSets ✅
+- **Persistent Volume Claims (PVC)** for storage requests
+- **Storage Classes** for storage provisioning
+- **StatefulSets** for stateful applications
+- **Data persistence** across pod restarts
+- **volumeClaimTemplates** for automatic PVC creation
 
 ### Phase 4: Advanced Concepts (Planned)
 - Ingress controllers
@@ -58,7 +59,10 @@ LearnKubernetes/
 ├── k8s/
 │   ├── configmap.yaml       # Configuration data
 │   ├── mongo-secret.yaml    # Sensitive credentials
-│   ├── mongo-deployment.yaml # MongoDB deployment
+│   ├── mongo-deployment.yaml # MongoDB deployment (Phase 2)
+│   ├── mongo-statefulset.yaml # MongoDB StatefulSet (Phase 3)
+│   ├── storage-class.yaml   # Storage class definition
+│   ├── mongo-pvc.yaml       # Persistent Volume Claim
 │   └── fastapi-deployment.yaml # FastAPI deployment
 ├── scripts/
 │   ├── deploy-phase2.sh     # Deployment automation
@@ -163,10 +167,17 @@ kubectl exec <mongo-pod> -- mongosh --eval "db.runCommand('ping')"
 - Database operations working (CRUD)
 - Authentication temporarily disabled for learning
 
+### ✅ Phase 3 Complete
+- Persistent Volumes and StatefulSets implemented
+- MongoDB data persistence across pod restarts
+- Storage Classes and PVCs configured
+- volumeClaimTemplates for automatic storage management
+- StatefulSet provides stable network identities
+
 ### 🔄 Next Steps
-- Implement Persistent Volumes (Phase 3)
+- **Phase 4**: Implement Ingress controllers and advanced networking
 - Add proper MongoDB authentication
-- Implement Ingress controllers
+- Implement Horizontal Pod Autoscaling (HPA)
 - Add monitoring and logging
 
 ## 🎓 Learning Objectives
