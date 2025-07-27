@@ -22,11 +22,12 @@ A comprehensive hands-on learning project for mastering Kubernetes concepts thro
 - **Data persistence** across pod restarts
 - **volumeClaimTemplates** for automatic PVC creation
 
-### Phase 4: Advanced Concepts (Planned)
-- Ingress controllers
-- Horizontal Pod Autoscaling (HPA)
-- Resource limits and requests
-- Health checks and probes
+### Phase 4: Ingress Controllers & Advanced Networking ✅
+- **Ingress Controllers** for external access and load balancing
+- **Path-based routing** for multiple services
+- **Domain name management** and clean URLs
+- **SSL/TLS ready** configuration
+- **Rate limiting** and advanced annotations
 
 ## 🏗️ Architecture
 
@@ -63,10 +64,14 @@ LearnKubernetes/
 │   ├── mongo-statefulset.yaml # MongoDB StatefulSet (Phase 3)
 │   ├── storage-class.yaml   # Storage class definition
 │   ├── mongo-pvc.yaml       # Persistent Volume Claim
+│   ├── ingress.yaml         # Basic Ingress (Phase 4)
+│   ├── advanced-ingress.yaml # Advanced Ingress with path routing
+│   ├── admin-deployment.yaml # Admin panel service
 │   └── fastapi-deployment.yaml # FastAPI deployment
 ├── scripts/
 │   ├── deploy-phase2.sh     # Deployment automation
-│   └── verify-phase2.sh     # Verification script
+│   ├── verify-phase2.sh     # Verification script
+│   └── test-phase4.sh       # Phase 4 testing script
 ├── docs/
 │   └── PHASE2-README.md     # Phase-specific documentation
 ├── Dockerfile               # Container definition
@@ -174,11 +179,18 @@ kubectl exec <mongo-pod> -- mongosh --eval "db.runCommand('ping')"
 - volumeClaimTemplates for automatic storage management
 - StatefulSet provides stable network identities
 
+### ✅ Phase 4 Complete
+- Ingress Controllers for external access and load balancing
+- Path-based routing for multiple services (FastAPI + Admin Panel)
+- Domain name management with clean URLs
+- SSL/TLS ready configuration with annotations
+- Rate limiting and advanced Ingress features
+
 ### 🔄 Next Steps
-- **Phase 4**: Implement Ingress controllers and advanced networking
-- Add proper MongoDB authentication
+- **Phase 5**: Advanced Networking & Service Mesh concepts
+- Add SSL/TLS certificates for HTTPS
 - Implement Horizontal Pod Autoscaling (HPA)
-- Add monitoring and logging
+- Add monitoring, logging, and observability
 
 ## 🎓 Learning Objectives
 
@@ -190,6 +202,21 @@ kubectl exec <mongo-pod> -- mongosh --eval "db.runCommand('ping')"
 - ✅ FastAPI deployment with external configuration
 - ✅ Troubleshooting Kubernetes deployments
 - ✅ Understanding pod lifecycle and restarts
+
+### Phase 3 Achievements
+- ✅ Persistent Volume Claims (PVC) and Storage Classes
+- ✅ StatefulSets vs Deployments for stateful applications
+- ✅ Data persistence across pod restarts
+- ✅ volumeClaimTemplates for automatic storage management
+- ✅ Understanding PV vs PVC vs StorageClass
+
+### Phase 4 Achievements
+- ✅ Ingress Controllers for external access
+- ✅ Path-based routing for multiple services
+- ✅ Domain name management and clean URLs
+- ✅ Load balancing and SSL/TLS configuration
+- ✅ Rate limiting and advanced Ingress annotations
+- ✅ Multiple services on single domain
 
 ## 🔍 Troubleshooting
 
