@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+        - name: fastapi
+          image: fastapi-mongo-app:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            # Non-sensitive configuration from ConfigMap
+            - name: MONGO_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: fastapi-config
+                  key: MONGO_HOST
+            - name: MONGO_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: fastapi-config
+                  key: MONGO_PORT
+            - name: MONGO_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: fastapi-config
+                  key: MONGO_DB
+            # Temporarily removing Secret references to get the app running
+            # - name: MONGO_USER
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: mongo-secret
+            #       key: MONGO_USER
+            # - name: MONGO_PASS
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: mongo-secret
+            #       key: MONGO_PASS
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-service
+spec:
+  selector:
+    app: fastapi
+  ports:
+    - port: 8000
+      targetPort: 8000
+  type: NodePort
