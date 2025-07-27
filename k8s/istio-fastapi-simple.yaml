@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi
+  namespace: kubernetes-learning
+  labels:
+    app: fastapi
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: fastapi
+        version: v1
+      annotations:
+        sidecar.istio.io/inject: "true"
+    spec:
+      containers:
+      - name: fastapi
+        image: python:3.10-slim
+        ports:
+        - containerPort: 8000
+        command: ["python", "-m", "http.server", "8000"]
+        workingDir: /tmp
+        env:
+        - name: MONGO_HOST
+          value: "mongo-service"
+        - name: MONGO_PORT
+          value: "27017"
+        - name: MONGO_DB
+          value: "testdb"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-service
+  namespace: kubernetes-learning
+  labels:
+    app: fastapi
+spec:
+  ports:
+  - port: 8000
+    targetPort: 8000
+    name: http
+  selector:
+    app: fastapi 

@@ -29,6 +29,14 @@ A comprehensive hands-on learning project for mastering Kubernetes concepts thro
 - **SSL/TLS ready** configuration
 - **Rate limiting** and advanced annotations
 
+### Phase 5: Advanced Networking & Service Mesh ✅
+- **Service Mesh** concepts and Istio implementation
+- **Automatic sidecar injection** for all services
+- **mTLS certificate management** for secure communication
+- **Gateway and Virtual Service** configuration
+- **Traffic routing** and load balancing
+- **Observability** and metrics collection
+
 ## 🏗️ Architecture
 
 ```
@@ -67,11 +75,16 @@ LearnKubernetes/
 │   ├── ingress.yaml         # Basic Ingress (Phase 4)
 │   ├── advanced-ingress.yaml # Advanced Ingress with path routing
 │   ├── admin-deployment.yaml # Admin panel service
-│   └── fastapi-deployment.yaml # FastAPI deployment
+│   ├── fastapi-deployment.yaml # FastAPI deployment
+│   ├── istio-mongo-statefulset.yaml # MongoDB with Istio (Phase 5)
+│   ├── istio-fastapi-deployment.yaml # FastAPI with Istio (Phase 5)
+│   ├── istio-fastapi-simple.yaml # Simple FastAPI for testing
+│   └── istio-gateway.yaml # Istio Gateway and Virtual Service
 ├── scripts/
 │   ├── deploy-phase2.sh     # Deployment automation
 │   ├── verify-phase2.sh     # Verification script
-│   └── test-phase4.sh       # Phase 4 testing script
+│   ├── test-phase4.sh       # Phase 4 testing script
+│   └── test-phase5.sh       # Phase 5 Istio testing script
 ├── docs/
 │   └── PHASE2-README.md     # Phase-specific documentation
 ├── Dockerfile               # Container definition
@@ -186,8 +199,16 @@ kubectl exec <mongo-pod> -- mongosh --eval "db.runCommand('ping')"
 - SSL/TLS ready configuration with annotations
 - Rate limiting and advanced Ingress features
 
+### ✅ Phase 5 Complete
+- Service Mesh implementation with Istio
+- Automatic sidecar injection for all services
+- mTLS certificate management for secure communication
+- Gateway and Virtual Service configuration
+- Traffic routing and load balancing
+- Observability and metrics collection
+
 ### 🔄 Next Steps
-- **Phase 5**: Advanced Networking & Service Mesh concepts
+- **Phase 6**: Advanced Traffic Management & Observability
 - Add SSL/TLS certificates for HTTPS
 - Implement Horizontal Pod Autoscaling (HPA)
 - Add monitoring, logging, and observability
@@ -217,6 +238,15 @@ kubectl exec <mongo-pod> -- mongosh --eval "db.runCommand('ping')"
 - ✅ Load balancing and SSL/TLS configuration
 - ✅ Rate limiting and advanced Ingress annotations
 - ✅ Multiple services on single domain
+
+### Phase 5 Achievements
+- ✅ Service Mesh concepts and Istio implementation
+- ✅ Automatic sidecar injection for all services
+- ✅ mTLS certificate management and security
+- ✅ Gateway and Virtual Service configuration
+- ✅ Traffic routing and load balancing
+- ✅ Observability and metrics collection
+- ✅ Understanding Istio control plane and data plane
 
 ## 🔍 Troubleshooting
 
