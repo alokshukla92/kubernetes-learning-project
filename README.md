@@ -29,13 +29,12 @@ A comprehensive hands-on learning project for mastering Kubernetes concepts thro
 - **SSL/TLS ready** configuration
 - **Rate limiting** and advanced annotations
 
-### Phase 5: Advanced Networking & Service Mesh ✅
-- **Service Mesh** concepts and Istio implementation
-- **Automatic sidecar injection** for all services
-- **mTLS certificate management** for secure communication
-- **Gateway and Virtual Service** configuration
-- **Traffic routing** and load balancing
-- **Observability** and metrics collection
+### Phase 5: Health Checks + Autoscaling ✅
+- **Health Checks** - Liveness and Readiness probes
+- **Horizontal Pod Autoscaler (HPA)** - CPU-based scaling
+- **Load Testing** - Performance testing with hey/wrk
+- **Resource Monitoring** - CPU and Memory utilization tracking
+- **Automatic Scaling** - Based on resource thresholds
 
 ## 🏗️ Architecture
 
@@ -76,15 +75,14 @@ LearnKubernetes/
 │   ├── advanced-ingress.yaml # Advanced Ingress with path routing
 │   ├── admin-deployment.yaml # Admin panel service
 │   ├── fastapi-deployment.yaml # FastAPI deployment
-│   ├── istio-mongo-statefulset.yaml # MongoDB with Istio (Phase 5)
-│   ├── istio-fastapi-deployment.yaml # FastAPI with Istio (Phase 5)
-│   ├── istio-fastapi-simple.yaml # Simple FastAPI for testing
-│   └── istio-gateway.yaml # Istio Gateway and Virtual Service
+│   ├── hpa-fastapi-deployment.yaml # FastAPI with HPA (Phase 5)
+│   └── hpa.yaml # Horizontal Pod Autoscaler configuration
 ├── scripts/
 │   ├── deploy-phase2.sh     # Deployment automation
 │   ├── verify-phase2.sh     # Verification script
 │   ├── test-phase4.sh       # Phase 4 testing script
-│   └── test-phase5.sh       # Phase 5 Istio testing script
+│   ├── test-phase5-health-hpa.sh # Phase 5 health checks & HPA demo
+│   └── load-test-phase5.sh  # Phase 5 load testing script
 ├── docs/
 │   └── PHASE2-README.md     # Phase-specific documentation
 ├── Dockerfile               # Container definition
@@ -200,17 +198,16 @@ kubectl exec <mongo-pod> -- mongosh --eval "db.runCommand('ping')"
 - Rate limiting and advanced Ingress features
 
 ### ✅ Phase 5 Complete
-- Service Mesh implementation with Istio
-- Automatic sidecar injection for all services
-- mTLS certificate management for secure communication
-- Gateway and Virtual Service configuration
-- Traffic routing and load balancing
-- Observability and metrics collection
+- Health checks implementation with Liveness and Readiness probes
+- Horizontal Pod Autoscaler (HPA) for CPU-based scaling
+- Resource limits and requests configuration
+- Load testing scenarios and validation
+- Automatic scaling based on resource thresholds
 
 ### 🔄 Next Steps
-- **Phase 6**: Advanced Traffic Management & Observability
+- **Phase 6**: Advanced Monitoring & Observability
 - Add SSL/TLS certificates for HTTPS
-- Implement Horizontal Pod Autoscaling (HPA)
+- Implement Service Mesh (Istio)
 - Add monitoring, logging, and observability
 
 ## 🎓 Learning Objectives
@@ -240,13 +237,12 @@ kubectl exec <mongo-pod> -- mongosh --eval "db.runCommand('ping')"
 - ✅ Multiple services on single domain
 
 ### Phase 5 Achievements
-- ✅ Service Mesh concepts and Istio implementation
-- ✅ Automatic sidecar injection for all services
-- ✅ mTLS certificate management and security
-- ✅ Gateway and Virtual Service configuration
-- ✅ Traffic routing and load balancing
-- ✅ Observability and metrics collection
-- ✅ Understanding Istio control plane and data plane
+- ✅ Health checks with Liveness and Readiness probes
+- ✅ Horizontal Pod Autoscaler (HPA) configuration
+- ✅ Resource limits and requests for scaling
+- ✅ Load testing scenarios and validation
+- ✅ Automatic scaling based on CPU/Memory thresholds
+- ✅ Understanding scaling behavior and policies
 
 ## 🔍 Troubleshooting
 

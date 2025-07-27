@@ -1,0 +1,109 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-hpa
+  namespace: default
+  labels:
+    app: fastapi-hpa
+    version: v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fastapi-hpa
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: fastapi-hpa
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+      - name: fastapi
+        image: fastapi-mongo-app:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+        env:
+        - name: MONGO_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: fastapi-config
+              key: MONGO_HOST
+        - name: MONGO_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: fastapi-config
+              key: MONGO_PORT
+        - name: MONGO_DB
+          valueFrom:
+            configMapKeyRef:
+              name: fastapi-config
+              key: MONGO_DB
+        - name: MONGO_USER
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: MONGO_USER
+        - name: MONGO_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: MONGO_PASS
+        # Resource limits for HPA
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        # Readiness probe - checks if pod is ready to serve traffic
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+          successThreshold: 1
+        # Liveness probe - checks if pod is alive
+        livenessProbe:
+          httpGet:
+            path: /live
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+          successThreshold: 1
+        # Startup probe - gives app time to start
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 30
+          successThreshold: 1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-hpa-service
+  namespace: default
+  labels:
+    app: fastapi-hpa
+spec:
+  ports:
+  - port: 8000
+    targetPort: 8000
+    name: http
+  selector:
+    app: fastapi-hpa 
